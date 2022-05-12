@@ -413,7 +413,7 @@ def varmodel():
 
             fnamee.grid(row=0, column=1)
 
-            tk.Button(master1, text='Quit', command=master1.quit).grid(row=5, column=1, sticky=tk.W, pady=4)
+            tk.Button(master1, text='Quit', command=master1.quit).grid(row=5, column=0, sticky=tk.W, pady=4)
             tk.Button(master1, text='Save', command=run).grid(row=5, column=2, sticky=tk.W, pady=4)
 
             tk.mainloop()
@@ -577,15 +577,18 @@ if adf >= 0.05 or adf1 >= 0.05:
             forecastddf = invert_transformation(sales, forecast1, second_diff=True)  
             print(forecastddf)      
             print("De-differenced forecasted Selling In and Selling Out Values: " + '\n')
-            print(forecastddf.to_string())
+            print(forecastddf)
             print('\n')
             forecastddf.plot()
             plt.show()
 
+            #Join de-differenced forecasted Selling In and Selling Out Values with the original dataset
+            forecastddf = sales.append(forecastddf[-p:], ignore_index=False)
+            
             #Convert all negative forecast values to 0
             forecastddf[forecastddf<0] = 0
             print("Forecasted Selling In and Selling Out Values with all negative values = 0: " + '\n')
-            print(forecastddf)
+            print(forecastddf.to_string())
             print('\n')
             forecastddf.plot()
             plt.show()
@@ -611,7 +614,7 @@ if adf >= 0.05 or adf1 >= 0.05:
 
                     fnamee.grid(row=0, column=1)
 
-                    tk.Button(master1, text='Quit', command=master1.quit).grid(row=5, column=1, sticky=tk.W, pady=4)
+                    tk.Button(master1, text='Quit', command=master1.quit).grid(row=5, column=0, sticky=tk.W, pady=4)
                     tk.Button(master1, text='Save', command=run).grid(row=5, column=2, sticky=tk.W, pady=4)
 
                     tk.mainloop()
